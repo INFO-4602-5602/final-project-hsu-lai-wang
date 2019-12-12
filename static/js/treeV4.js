@@ -1,5 +1,5 @@
   //https://bl.ocks.org/d3noob/43a860bc0024792f8803bba8ca0d5ecd
-d3.json("data/tree.json", function(error, data){
+d3.json("data/tree.json", function(error, treeData){
     //use data here
     // Set the dimensions and margins of the diagram
 var margin = {top: 20, right: 90, bottom: 30, left: 90},
@@ -24,7 +24,7 @@ var i = 0,
 var treemap = d3.tree().size([height, width]);
 
 // Assigns parent, children, height, depth
-root = d3.hierarchy(data, function(d) { return d.children; });
+root = d3.hierarchy(treeData, function(d) { return d.children; });
 root.x0 = height / 2;
 root.y0 = 0;
 
@@ -45,11 +45,11 @@ function collapse(d) {
 function update(source) {
 
   // Assigns the x and y position for the nodes
-  var data = treemap(root);
+  var treeData = treemap(root);
 
   // Compute the new tree layout.
-  var nodes = data.descendants(),
-      links = data.descendants().slice(1);
+  var nodes = treeData.descendants(),
+      links = treeData.descendants().slice(1);
 
   // Normalize for fixed-depth.
   nodes.forEach(function(d){ d.y = d.depth * 180});
@@ -143,7 +143,14 @@ function update(source) {
       .duration(duration)
       .attr('d', function(d){ return diagonal(d, d.parent) });
 
-
+  // Remove any exiting links
+  var linkExit = link.exit().transition()
+      .duration(duration)
+      .attr('d', function(d) {
+        var o = {x: source.x, y: source.y}
+        return diagonal(o, o)
+      })
+      .remove();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
  
 
