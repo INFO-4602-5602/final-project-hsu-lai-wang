@@ -1,0 +1,51 @@
+{
+  "name": "T tfidf_powerful <= 0.02",
+  "children": [
+    {
+      "name": "T tfidf_always <= 0.013",
+      "children": [
+        {
+          "name": "T tfidf_at <= 0.021",
+          "children": [
+            {
+              "name": "T 7906 pos, ..."
+            },
+            {
+              "name": "F 5888 neg, ..."
+            }
+          ]
+        },
+        {
+          "name": "F tfidf_is <= 0.091",
+          "children": [
+            {
+              "name": "T 1223 pos, ..."
+            },
+            {
+              "name": "F 455 neg, ..."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "F tfidf_pulled <= 0.079",
+      "children": [
+        {
+          "name": "T tfidf_imagined <= 0.062",
+          "children": [
+            {
+              "name": "T 342 pos, ..."
+            },
+            {
+              "name": "F 5 neg, ..."
+            }
+          ]
+        },
+        {
+          "name": "F 1 neg"
+        }
+      ]
+    }
+  ]
+}

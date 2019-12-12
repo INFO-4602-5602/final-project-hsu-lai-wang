@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script> -->
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="static/js/ie-emulation-modes-warning.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <title>Info Viz Final Project</title>
+
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="static/css/jumbotron-narrow.css" rel="stylesheet">
+    <link href="static/css/emotionlines.css" rel="stylesheet">
+    <link href="static/css/bubble.css" rel="stylesheet">
+    <link href="static/css/emotionlines.css" rel="stylesheet">
+    <link href="static/css/groupedBar.css" rel="stylesheet">
+    <link href="static/css/predictions.css" rel="stylesheet">
+    <link href="static/css/treeV4.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <div class="container">
+
+
+    <div class="header clearfix">
+	<div class="container row">
+	<div class="container col-lg-4">
+		  <h1 class="text-muted text-bold  text-header">IMDB Movie Review</h1>
+		  <h4 class="text-muted text-bold text-header">Information Visualization Final Project</h4>
+	</div>
+	<div class="container col-lg-8">
+      	<div id='nav-container' >
+        	<nav>
+          	<ul class="nav nav-pills pull-right">
+				<li role="presentation"><a href="#main">Data Statistics</a></li>
+        <li role="presentation"><a href="#add">Classification Models</a></li>
+        <li role="presentation"><a href="#sentiment">Sentiment Trajectory</a></li>
+				<li role="presentation"><a href="#contact">Members</a></li>
+          	</ul>
+        	</nav>
+      	</div>
+	</div>
+</div>
+</div>
+
+
+    <div class="container row example-section"> 
+		<a name="main"></a>
+
+    <h2>Data Statistics</h2>
+    Below shows 4 animated wordclouds giving an overall view of the words that are most commonly used in reviews with different ratings.<br>
+    <div style="text-align:center;">
+    <img src="figs/wordclouds.gif" alt="animated" style=" margin: auto;"/><br><br>
+    </div>
+
+    The bar chart below shows thw word percentage of negative and postive words by the word type.<br><br>
+    <div id="groupedBar" style="margin: auto;"></div>
+    <br>
+
+    For this topic visualization, we apply KMeans Clustering to cluster reviews by its TF-IDF feature. Then, we find the top words of each clusters and give it a related genre.
+    <div id="mainBubble"></div><br><br>
+
+    
+    Logstic regression feature weights
+    <div id="lrWeight" style="text-align: center;"></div><br><br>
+    
+    The spliting process during training of one decision tree in the random forest
+    <div id="dc" style="text-align: center;"></div>
+  </div>
+	<hr>
+
+	<div class="container row example-section"> 
+		<a name="add"></a>
+    <h2>Classification Models</h2>
+    The interactive plot below shows the values of true negative, false positive, false negative, and true positive of different classifiers. <br>
+    The accuracy of each classifier is as follows: <br>
+    <ul>
+      <li>Logistic Regression: 88.6%</li>
+      <li>Random Forest: 81.6%</li>
+      <li>LSTM with attention: 90.6%</li>
+    </ul>
+    <div id="dashboard" style="text-align:center;"></div><br>
+		<br>
+		<br>
+	</div>
+
+	<hr>
+	
+  <hr>
+  <div class="container row example-section"> 
+		<a name="sentiment"></a>
+    <h2>Sentiment Trajectory</h2>
+    In the part, we try to explore the sentiment trajectory in reviews. 
+    <br>
+      <ol>
+        <li>Selecting reviews with more than 20 sentences</li>
+        <li>Using logistic regression model to predict the positive probability of each sentence</li>
+        <li>Interpolate probability vector to same dimension to build the sentiment trajectory vector</li>
+        <li>Agglomerative Clustering all sentiment trajectories</li>
+        <li>Plot the mean of clusters</li>
+      </ol>
+    <div style="text-align:center;">
+      <img src="figs/trajectory.png" alt="animated" style=" margin: auto;"/><br><br>
+    </div>
+    <div style="text-align:center;">
+      <img src="figs/clustering.png" alt="animated" style=" margin: auto;"/><br><br>
+    </div>
+    <div style="text-align:center;">
+      <img src="figs/pos_trajectory.png" alt="animated" style=" margin: auto;"/><br><br>
+    </div>
+    <div style="text-align:center;">
+      <img src="figs/neg_trajectory.png" alt="animated" style=" margin: auto;"/><br><br>
+    </div>
+		<br>
+		<br>
+  </div>
+  
+	<hr>
+	
+  <hr>
+    <div class="container row example-section">
+    <a name="contact"></a>
+	   <h3 class='text-bold'>Contact</h3>
+
+			<div class="col-lg-4 profile-div">
+      		<div class="text-bold profile-name; font-size:13;">Chao-Chun Hsu</div>
+			</div>
+			<div class="col-lg-4 profile-div">
+				<div class="text-bold profile-name; font-size:13;">Vivian Lai</div>
+		  </div>
+		  <div class="col-lg-4 profile-div">
+			 <div class="text-bold profile-name; font-size:13;">Yichen Wang</div>
+	 	   </div>
+    </div>		
+        	
+    </div>	
+      	
+      	
+     
+      
+
+      <footer class="footer"></footer>
+
+    </div> <!-- /container -->
+
+    <script src="static/js/groupedBar.js"></script>
+    <script src="static/js/predictions.js"></script>
+    <script src="static/js/treeV4.js"></script>
+    <script src="static/js/visLR_neg.js"></script>
+    <script src="static/js/visLR_pos.js"></script>
+    <script src="static/js/bubble.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="static/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
