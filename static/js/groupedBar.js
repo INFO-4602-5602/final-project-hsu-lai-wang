@@ -1,6 +1,5 @@
 !(function(){
-    "use strict"
-    //https://bl.ocks.org/shimizu/a4c0c940b19d42cf8ebca29e20573aca
+    
     var width,height
     var chartWidth, chartHeight
     var margin

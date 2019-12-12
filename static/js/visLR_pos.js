@@ -1,4 +1,3 @@
-//https://bl.ocks.org/alokkshukla/3d6be4be0ef9f6977ec6718b2916d168
         dataset1 = {
             "children":  [{'Name': 'great', 'Weight': 7.3},
                          {'Name': 'excellent', 'Weight': 6.0},
