@@ -153,7 +153,7 @@
                 "translate(" + (margin.left+390) + " ," + 
                                (margin.bottom*12+115) + ")")
           .style("text-anchor", "middle")
-          .text("Word type");
+          .text("Word category");
          svg.append("text")
             .attr("transform", "rotate(-90)")
             .attr("y", 0 + margin.left-50)
