@@ -1,13 +1,10 @@
 d3.json("data/tree.json", function(error, treeData){
-    //use data here
-    // Set the dimensions and margins of the diagram
+
 var margin = {top: 20, right: 90, bottom: 30, left: 190},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-// appends a 'group' element to 'svg'
-// moves the 'group' element to the top left margin
 var svg = d3.select("#dc").append("svg")
     .attr("width", width + margin.right + margin.left)
     .attr("height", height + margin.top + margin.bottom)
@@ -19,7 +16,7 @@ var i = 0,
     duration = 750,
     root;
 
-// declares a tree layout and assigns the size
+// tree layout 
 var treemap = d3.tree().size([height, width]);
 
 // Assigns parent, children, height, depth
@@ -32,7 +29,7 @@ root.children.forEach(collapse);
 
 update(root);
 
-// Collapse the node and all it's children
+// Collapse the node and children
 function collapse(d) {
   if(d.children) {
     d._children = d.children
@@ -46,7 +43,7 @@ function update(source) {
   // Assigns the x and y position for the nodes
   var treeData = treemap(root);
 
-  // Compute the new tree layout.
+  // new tree layout.
   var nodes = treeData.descendants(),
       links = treeData.descendants().slice(1);
 
@@ -55,11 +52,10 @@ function update(source) {
 
   // ****************** Nodes section ***************************
 
-  // Update the nodes...
   var node = svg.selectAll('g.node')
       .data(nodes, function(d) {return d.id || (d.id = ++i); });
 
-  // Enter any new modes at the parent's previous position.
+  // Enter new nodes 
   var nodeEnter = node.enter().append('g')
       .attr('class', 'node')
       .attr("transform", function(d) {
@@ -67,7 +63,7 @@ function update(source) {
     })
     .on('click', click);
 
-  // Add Circle for the nodes
+  // Circle for the nodes
   nodeEnter.append('circle')
       .attr('class', 'node')
       .attr('r', 1e-6)
@@ -75,7 +71,7 @@ function update(source) {
           return d._children ? "lightsteelblue" : "#fff";
       });
 
-  // Add labels for the nodes
+  //labels for the nodes
   nodeEnter.append('text')
       .attr("dy", ".35em")
       .attr("x", function(d) {
@@ -105,7 +101,7 @@ function update(source) {
     .attr('cursor', 'pointer');
 
 
-  // Remove any exiting nodes
+  // Remove nodes
   var nodeExit = node.exit().transition()
       .duration(duration)
       .attr("transform", function(d) {
@@ -121,20 +117,19 @@ function update(source) {
   nodeExit.select('text')
     .style('fill-opacity', 1e-6);
 
-  // ****************** links section ***************************
-
-  // Update the links...
+  // links 
+  // Update links...
   var link = svg.selectAll('path.link')
       .data(links, function(d) { return d.id; });
 
-  // Enter any new links at the parent's previous position.
+  // Enter new links
   var linkEnter = link.enter().insert('path', "g")
       .attr("class", "link")
       .attr('d', function(d){
         var o = {x: source.x0, y: source.y0}
         return diagonal(o, o)
       });
-  // UPDATE
+  // link update
   var linkUpdate = linkEnter.merge(link);
 
   // Transition back to the parent element position
